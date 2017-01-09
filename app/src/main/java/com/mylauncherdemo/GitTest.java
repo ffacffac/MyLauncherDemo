@@ -5,4 +5,7 @@ package com.mylauncherdemo;
  */
 public class GitTest {
     String str = "测试提交到Git新的文件";
+
+
+    String strChange = "修改了某些东西从而提交";
 }
