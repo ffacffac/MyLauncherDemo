@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mylauncherdemo"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
+
+    <!-- 该权限为系统自定义权限 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.GET_TASK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.STATUS_BAR" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+
+    <!-- @android:style/Theme.NoTitleBar.Fullscreen让屏幕全屏 -->
+    <application
+        name="com.mylauncherdemo.DemoApplication"
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mylauncherdemo.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <!-- 系统启动的时候，将把这个当做launcher -->
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mylauncherdemo.ActivityLeakcanary" />
+
+        <service
+            android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
+            android:enabled="false"
+            android:process=":leakcanary" />
+        <service
+            android:name="com.squareup.leakcanary.DisplayLeakService"
+            android:enabled="false" />
+
+        <activity
+            android:name="com.squareup.leakcanary.internal.DisplayLeakActivity"
+            android:enabled="false"
+            android:icon="@drawable/leak_canary_icon"
+            android:label="@string/leak_canary_display_activity_label"
+            android:taskAffinity="com.squareup.leakcanary"
+            android:theme="@style/leak_canary_LeakCanary.Base" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.squareup.leakcanary.internal.RequestStoragePermissionActivity"
+            android:enabled="false"
+            android:icon="@drawable/leak_canary_icon"
+            android:label="@string/leak_canary_storage_permission_activity_label"
+            android:taskAffinity="com.squareup.leakcanary"
+            android:theme="@style/leak_canary_Theme.Transparent" />
+    </application>
+
+</manifest>
